@@ -1,6 +1,13 @@
 import React, { useRef } from 'react'
+import { isLogin } from '../atoms/isLoginAtom';
+import { useAtom } from 'jotai';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Login() {
+  const [login,setLogin] = useAtom(isLogin);
+  const navigate = useNavigate();
+
   const account = {"www@gmailcom" : 1111};
 
   const emailRef = useRef();
@@ -11,10 +18,21 @@ export default function Login() {
     e.preventDefault(); // ✅ 새로고침 막기
     const email = emailRef.current.value;
     const pwd = pwdRef.current.value;
+
+    if (email == "") {
+      alert("이메일을 입력하세요.");
+      emailRef.focus();
+    }
+    if (pwd == ""){
+      alert("비밀번호를 입력하세요.");
+      pwd.focus();
+    }
     
     if (email in account) {
       if (account[email] == pwd) {
         alert("로그인 성공!");
+        setLogin(true);
+        <div>{email}님이 로그인 되었습니다</div>
       }
       else {
         alert("비밀번호가 다릅니다!");
@@ -27,8 +45,10 @@ export default function Login() {
 
   return (
       <>
-    <div className="py-12 flex-1 flex-col justify-center px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm"> 
+    <div className="py-12 flex-1 flex-col justify-center px-6 lg:px-8 border-black border-2">
+      {login == false && (
+        <div>
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm "> 
           <h2 className="mt-20 text-center text-2xl/9 font-bold tracking-tight text-gray-600">
             로그인 페이지
           </h2>
@@ -87,8 +107,17 @@ export default function Login() {
                 Sign in
               </button>
             </div>
-          </form>
+          </form> 
         </div>
+        </div>
+        )}
+          {login && (
+            <div className='h-full flex justify-center items-center'>
+              <p>
+              <a href='{emailRef.current.value}'>{emailRef.current.value}</a> 님이 로그인 되었습니다!
+              </p>
+            </div>
+          )}
       </div>
     </>
   )

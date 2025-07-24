@@ -3,7 +3,7 @@ import reactLogo from "../assets/react.svg"
 import viteLogo from '/vite.svg'
 
 // 라우팅
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 // 전역변수(상태공유)
 import { useAtom } from 'jotai' 
@@ -14,11 +14,11 @@ export default function Nav() {
   //초기값 = false = 로그아웃
   //useAtom 괄호안 '객체' 들어가야함
   const [login, setLogin] = useAtom(isLogin);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setLogin(false);
-    //로컬스토리지에서 없어짐
-    localStorage.removeItem("id");
+    navigate("/Login");
   }
   return (
      <header className="w-full min-h-20 flex justify-between items-center bg-blue-200 ">
