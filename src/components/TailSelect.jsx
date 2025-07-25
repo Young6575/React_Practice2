@@ -9,7 +9,7 @@ export default function TailSelect({selRef,handelSel}) {
      <option>--측정소선택--</option>  
       {
           sarea.map(item => (
-                    <option key={item['코드']} value={item['측정소']}>{item['측정소']}</option>
+                    <option key={item['코드']} value={item['코드']}>{item['측정소']}</option>
           ))
       }
     </select>
