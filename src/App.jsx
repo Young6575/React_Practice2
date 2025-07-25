@@ -5,6 +5,7 @@ import Nav from './components/Nav'
 import Home from './components/Home'
 import Login from './components/Login'
 import Subway from './components/Subway'
+import Rest from './components/rest'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/Home' element={<Home/>} ></Route>
           <Route path='/Login' element={<Login/>} ></Route>
           <Route path='/Subway' element={<Subway/>} ></Route>
+          <Route path='/rest' element={<Rest/>} ></Route>
         </Routes>
       </main>
       <footer className="w-full min-h-20 flex justify-center items-center bg-blue-400 text-white">
